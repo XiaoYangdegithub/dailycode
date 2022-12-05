@@ -1,0 +1,47 @@
+name: Build Packages
+on:
+  push:
+    branches:
+      - main
+    tag:
+  release:
+    types: [published]
+jobs:
+  sdist:
+    name: Build and upload packages
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Fetch Git tags
+      run: git fetch --tags
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python packaging deps
+      run: pip install -U flit
+
+    - name: Build source dist
+      run: flit build
+
+    - name: Save archive
+      uses: actions/upload-artifact@v1
+      with:
+        name: pypi-pkgs
+        path: dist
+    
+    - name: List dist dir
+      run: ls -R dist
+
+    - name: Publish PyPI packages
+      if: github.event_name == 'release'
+      run: |
+        flit publish
+      env:
+        TWINE_NON_INTERACTIVE: y
+        FLIT_USERNAME: __token__
+        FLIT_PASSWORD: ${{ secrets.TWINE_TOKEN }}

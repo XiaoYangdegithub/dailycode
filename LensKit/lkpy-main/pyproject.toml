@@ -1,0 +1,94 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "lenskit"
+authors = [
+    {name = "Michael Ekstrand", email = "michaelekstrand@boisestate.edu"}
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+]
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">= 3.8"
+dynamic = ['version', 'description']
+dependencies = [
+    "pandas >=1.0, ==1.*",
+    "numpy >= 1.19",
+    "scipy >= 1.2",
+    "numba >= 0.51, < 0.57",
+    "cffi >= 1.12.2",
+    "psutil >= 5",
+    "binpickle >= 0.3.2",
+    "seedbank >= 0.1.0",
+    "csr >= 0.4",
+]
+
+[project.urls]
+homepage = "https://lenskit.org"
+documentation = "https://lkpy.lenskit.org"
+source = "https://github.com/lenskit/lkpy"
+
+[project.optional-dependencies]
+test = [
+    "pytest ==6.*",
+    "pytest-doctestplus >= 0.9",
+    "hypothesis >= 6"
+]
+dev = [
+    "lenskit-build-helpers >=0.1",
+    "flit >= 3",
+    "conda-lock",
+    "invoke >=1",
+    "requests >=2",
+    "packaging >= 20",
+    "flake8 >= 3",
+    "coverage >= 5",
+    "pytest-cov >= 2.12",
+    "ipython >= 7",
+    "docopt >= 0.6",
+    "tqdm >= 4",
+    "keyring",
+    "sphinx-autobuild >= 2021",
+]
+doc = [
+    "sphinx >= 4.2",
+    "sphinxcontrib-bibtex >= 2.0",
+    "sphinx_rtd_theme >= 0.5",
+    "myst-nb >= 0.13",
+]
+demo = [
+    "notebook >= 6",
+    "nbval >= 0.9",
+    "matplotlib ~= 3.4",
+    "nbformat >=5.2",
+    "ipython >= 7",
+]
+sklearn = ["scikit-learn >= 0.22"]
+
+[tool.flit.sdist]
+exclude = [
+    ".github",
+    "*.ipynb",
+    "docs",
+    "data",
+    "examples",
+    "build-tools",
+    "lkbuild",
+    "tasks.py",
+    "tests",
+]
+
+[tool.conda-lock]
+channels = [
+    "conda-forge",
+    "lenskit",
+]

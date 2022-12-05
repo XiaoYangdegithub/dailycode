@@ -1,0 +1,255 @@
+name: Test Suite
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+concurrency:
+  group: test-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  conda:
+    name: Conda Python ${{matrix.python}} on ${{matrix.platform}}
+    runs-on: ${{matrix.platform}}-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        platform:
+        - macos
+        - windows
+        - ubuntu
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: 👢 Set up Conda environment
+        uses: lenskit/lkbuild/actions/setup-conda-env@main
+        id: setup
+        with:
+          extras: sklearn
+          python-version: ${{matrix.python}}
+
+      - name: Inspect environment
+        run: |
+          python -V
+          numba -s
+
+      - name: Test LKPY
+        run: |
+          python -m pytest --cov=lenskit --verbose --log-file=test.log
+        env:
+          NUMBA_NUM_THREADS: 4
+          MKL_THREADING_LAYER: sequential
+          OMP_NUM_THREADS: 1
+          OPENBLAS_NUM_THREADS: 1
+
+      - name: Non-JIT Test Coverage
+        if: runner.os == 'Linux'
+        env:
+          NUMBA_DISABLE_JIT: 1
+        run: |
+          python -m pytest --cov=lenskit --cov-append -m 'not slow' --log-file=test-nojit.log
+
+      - name: Aggreagate Coverage Data
+        run: |
+          coverage xml
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: log-conda-${{matrix.platform}}-py${{matrix.python}}-${{matrix.blas}}
+          path: |
+            coverage.xml
+            test*.log
+            emissions.csv
+
+  check-docs:
+    name: Docs, Examples, and Eval
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: 👢 Set up Conda environment
+        uses: lenskit/lkbuild/actions/setup-conda-env@main
+        id: setup
+        with:
+          python-version: '3.8'
+          extras: demo
+
+      - name: Inspect Conda environment
+        run: |
+          echo "Conda environment info"
+          conda info
+          echo "Conda environment package list"
+          conda list
+
+      - name: Cache ML data
+        uses: actions/cache@v2
+        with:
+          path: |
+            data
+            !data/*.zip
+          key: test-mldata-000
+
+      - name: Download ML Data
+        run: |
+          lkbuild fetch-data -d ml-100k
+          lkbuild fetch-data -d ml-1m
+          lkbuild fetch-data -d ml-10m
+          lkbuild fetch-data -d ml-20m
+
+      - name: Install for Testing
+        run: |
+          flit install --deps none -s
+
+      - name: Run Eval Tests
+        run: |
+          python -m pytest --cov=lenskit -m eval --log-file test-eval.log
+          python -m pytest --cov=lenskit --cov-append -m realdata --log-file test-realdata.log
+
+      - name: Validate Doc Notebooks
+        run: |
+          cp docs/*.ipynb data
+          python -m pytest --nbval-lax --cov=lenskit --cov-append data --log-file test-docs.log
+
+      # - name: Validate Examples
+      #   run: |
+      #     python -m pytest --nbval-lax --cov=lenskit --cov-append examples --log-file test-examples.log
+      - name: Aggreagate Coverage Data
+        run: |
+          coverage xml
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: log-check-docs
+          path: |
+            test*.log
+            coverage.xml
+            emissions.csv
+
+  vanilla:
+    name: Vanilla Python ${{matrix.python}} on ${{matrix.platform}}
+    runs-on: ${{matrix.platform}}-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        platform:
+        - windows
+        - ubuntu
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python and environment
+        uses: lenskit/lkbuild/actions/setup-vanilla-env@main
+        with:
+          python-version: ${{matrix.python}}
+
+      - name: Run tests
+        run: |
+          python -m pytest --cov=lenskit --cov-report=xml --log-file=test.log
+
+      - name: Aggreagate Coverage Data
+        run: coverage xml
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: log-vanilla-${{matrix.platform}}-py${{matrix.python}}
+          path: |
+            test*.log
+            coverage.xml
+            emissions.csv
+
+  mindep:
+    name: Minimal Supported Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+          architecture: x64
+
+      - name: Set up Python deps
+        run: |
+          set -e
+          python -m pip install -U pip
+          python -m pip install -c min-constraints.txt .[test]
+          python -m pip install pytest-cov
+
+      - name: Run tests
+        run: |
+          python -m pytest --cov=lenskit --cov-report=xml --log-file test.log
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: log-mindep
+          path: |
+            test*.log
+            coverage.xml
+            emissions.csv
+
+  results:
+    name: Test Suite Results
+    runs-on: ubuntu-latest
+    needs:
+    - conda
+    - vanilla
+    - check-docs
+    - mindep
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v2
+        with:
+          path: test-logs
+
+      - name: List log files
+        run: ls -lR test-logs
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v2
+        with:
+          directory: test-logs/
+
+      - name: Upload all test data
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-outputs
+          path: test-logs

@@ -1,0 +1,175 @@
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.5180  avg_val_loss: 1.4510  time: 490s
+Epoch 1 - Score: 0.2016
+Epoch 1 - Save Best Score: 0.2016 Model
+Epoch 2 - avg_train_loss: 1.3916  avg_val_loss: 1.3885  time: 495s
+Epoch 2 - Score: 0.2003
+Epoch 3 - avg_train_loss: 1.2745  avg_val_loss: 1.3636  time: 495s
+Epoch 3 - Score: 0.2460
+Epoch 3 - Save Best Score: 0.2460 Model
+Epoch 4 - avg_train_loss: 1.1613  avg_val_loss: 1.3784  time: 496s
+Epoch 4 - Score: 0.2688
+Epoch 4 - Save Best Score: 0.2688 Model
+Epoch 5 - avg_train_loss: 1.0922  avg_val_loss: 1.3762  time: 498s
+Epoch 5 - Score: 0.2498
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.6307  avg_val_loss: 1.6376  time: 489s
+Epoch 1 - Score: 0.1212
+Epoch 1 - Save Best Score: 0.1212 Model
+Epoch 2 - avg_train_loss: 1.4652  avg_val_loss: 1.5047  time: 493s
+Epoch 2 - Score: 0.1729
+Epoch 2 - Save Best Score: 0.1729 Model
+Epoch 3 - avg_train_loss: 1.2875  avg_val_loss: 1.5315  time: 494s
+Epoch 3 - Score: 0.2386
+Epoch 3 - Save Best Score: 0.2386 Model
+Epoch 4 - avg_train_loss: 1.0676  avg_val_loss: 1.5858  time: 494s
+Epoch 4 - Score: 0.2553
+Epoch 4 - Save Best Score: 0.2553 Model
+Epoch 5 - avg_train_loss: 0.8880  avg_val_loss: 1.6521  time: 493s
+Epoch 5 - Score: 0.2554
+Epoch 5 - Save Best Score: 0.2554 Model
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.6307  avg_val_loss: 1.6343  time: 489s
+Epoch 1 - Score: 0.1219
+Epoch 1 - Save Best Score: 0.1219 Model
+Epoch 2 - avg_train_loss: 1.4664  avg_val_loss: 1.5179  time: 497s
+Epoch 2 - Score: 0.1566
+Epoch 2 - Save Best Score: 0.1566 Model
+Epoch 3 - avg_train_loss: 1.2877  avg_val_loss: 1.5463  time: 500s
+Epoch 3 - Score: 0.2311
+Epoch 3 - Save Best Score: 0.2311 Model
+Epoch 4 - avg_train_loss: 1.0666  avg_val_loss: 1.5913  time: 500s
+Epoch 4 - Score: 0.2623
+Epoch 4 - Save Best Score: 0.2623 Model
+Epoch 5 - avg_train_loss: 0.8870  avg_val_loss: 1.6631  time: 499s
+Epoch 5 - Score: 0.2521
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.6265  avg_val_loss: 1.6033  time: 444s
+Epoch 1 - Score: 0.2852
+Epoch 1 - Save Best Score: 0.2852 Model
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.6264  avg_val_loss: 1.6004  time: 445s
+Epoch 1 - Score: 0.2864
+Epoch 1 - Save Best Score: 0.2864 Model
+Epoch 2 - avg_train_loss: 1.4434  avg_val_loss: 1.4919  time: 453s
+Epoch 2 - Score: 0.3478
+Epoch 2 - Save Best Score: 0.3478 Model
+Epoch 3 - avg_train_loss: 1.1566  avg_val_loss: 1.6500  time: 456s
+Epoch 3 - Score: 0.3581
+Epoch 3 - Save Best Score: 0.3581 Model
+Epoch 4 - avg_train_loss: 0.7423  avg_val_loss: 1.9600  time: 456s
+Epoch 4 - Score: 0.3606
+Epoch 4 - Save Best Score: 0.3606 Model
+Epoch 5 - avg_train_loss: 0.4419  avg_val_loss: 2.1472  time: 456s
+Epoch 5 - Score: 0.3593
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
+Epoch 1 - avg_train_loss: 1.6264  avg_val_loss: 1.5987  time: 361s
+Epoch 1 - Score: 0.2928
+Epoch 1 - Save Best Score: 0.2928 Model
+Epoch 2 - avg_train_loss: 1.4429  avg_val_loss: 1.4962  time: 363s
+Epoch 2 - Score: 0.3504
+Epoch 2 - Save Best Score: 0.3504 Model
+Epoch 3 - avg_train_loss: 1.1570  avg_val_loss: 1.6460  time: 363s
+Epoch 3 - Score: 0.3581
+Epoch 3 - Save Best Score: 0.3581 Model
+Epoch 4 - avg_train_loss: 0.7387  avg_val_loss: 1.9564  time: 362s
+Epoch 4 - Score: 0.3721
+Epoch 4 - Save Best Score: 0.3721 Model
+Epoch 5 - avg_train_loss: 0.4394  avg_val_loss: 2.1474  time: 362s
+Epoch 5 - Score: 0.3721
+===============lr_1e-05===============
+===============seed_1006===============
+===============total_epochs_5===============
+===============num_warmup_steps_0===============
+========== training ==========
